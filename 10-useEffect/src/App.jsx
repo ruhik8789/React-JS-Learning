@@ -8,8 +8,8 @@ export default function App() {
       setCount((count) => count + 1);
     }, 2000);
 
-    return () => clearTimeout(id)
-  }, []);
+    return () => clearTimeout(id);
+  }, [count, name]);
 
   return (
     <>
