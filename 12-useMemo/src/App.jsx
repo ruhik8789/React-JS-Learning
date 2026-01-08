@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 export default function App() {
   const [number, setNumber] = useState(0);
@@ -10,13 +10,29 @@ export default function App() {
   }
 
   // const result = cubeNum(number);
-  const result = useMemo(() => {return cubeNum(number)}, [number])
+
+  const result = useMemo(() => {
+    return cubeNum(number);
+  }, [number]);
+
   return (
     <>
-      <input type="number" value={number} onChange={(e) => {setNumber(e.target.value)}}/>
+      <input
+        type="number"
+        value={number}
+        onChange={(e) => {
+          setNumber(e.target.value);
+        }}
+      />
       <h1>Cube of the number is: {result}</h1>
-      <button onClick={() => {setCounter(counter + 1)}}>Counter++</button>
+      <button
+        onClick={() => {
+          setCounter(counter + 1);
+        }}
+      >
+        Counter++
+      </button>
       <h1>Counter: {counter}</h1>
     </>
-  )
+  );
 }
