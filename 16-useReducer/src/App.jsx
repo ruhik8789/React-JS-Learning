@@ -11,6 +11,8 @@ const App = () => {
         return { count: state.count + 1 };
       case "decrease":
         return { count: state.count - 1 };
+      case "input":
+        return { count: action.payload };
       default:
         return state;
     }
@@ -38,6 +40,13 @@ const App = () => {
       >
         Decrease
       </button>
+      <input
+        value={state.count}
+        type="number"
+        onChange={(e) =>
+          dispatch({ type: "input", payload: Number(e.target.value) })
+        }
+      />
     </>
   );
 };
