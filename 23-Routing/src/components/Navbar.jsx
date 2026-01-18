@@ -1,27 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="navbar">
       <img src="" alt="" />
       <ul>
-        <Link to="/">
+        <NavLink to="/">
           <li>Home</li>
-        </Link>
-        <Link to="/products">
+        </NavLink>
+        <NavLink to="/products">
           <li>Products</li>
-        </Link>
-        <Link to="/about">
+        </NavLink>
+        <NavLink to="/about">
           <li>About</li>
-        </Link>
-        <Link to="/contact">
+        </NavLink>
+        <NavLink to="/contact">
           <li>Contact</li>
-        </Link>
+        </NavLink>
+        <NavLink to="/jobs">
+          <li>Jobs</li>
+        </NavLink>
       </ul>
-      <button>Get Started</button>
+      <button onClick={() => navigate("/about")}>Get Started</button>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
