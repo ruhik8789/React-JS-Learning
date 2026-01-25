@@ -1,27 +1,40 @@
-import React from 'react'
+import React from "react";
+import AddToCart from "./AddToCart";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, removeItem } from "./redux/slice";
+import { fetchProducts } from "./redux/productSlice";
+import { useEffect } from "react";
 
 const Product = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('🚀 Dispatching fetchProducts...');
+    dispatch(fetchProducts());
+  }, [dispatch]); 
+
+  const productSelector = useSelector((state) => {
+    console.log("state", state);
+    return state.products.items;
+  });
+
   return (
-    <div className="product-card">
-      <img
-        src="https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2lyZWxlc3MlMjBoZWFkcGhvbmVzfGVufDB8fDB8fHww"
-        alt="Product Image"
-        className="product-image"
-      />
-
-      <div className="product-info">
-        <h3 className="product-title">Wireless Headphones</h3>
-        <p className="product-desc">
-          High quality wireless headphones with noise cancellation.
-        </p>
-
-        <div className="product-footer">
-          <span className="product-price">₹2,999</span>
-          <button className="add-to-cart">Add to Cart</button>
-        </div>
-      </div>
+    <div className="grid">
+      {productSelector.length &&
+        productSelector.map((product) => (
+          <div key={product.id} className="card">
+            <img src={product.thumbnail} alt="" />
+            <div className="content">
+              <div className="title">{product.title}</div>
+              <div className="brand">{product.brand}</div>
+              <div className="price">${product.price}</div>
+              <div className="rating">{product.rating}</div>
+              <button class="add-to-cart">Add To Cart</button>
+            </div>
+          </div>
+        ))}
     </div>
   );
-}
+};
 
-export default Product
+export default Product;
