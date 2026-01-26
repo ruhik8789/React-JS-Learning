@@ -20,17 +20,14 @@ const productsSlice = createSlice({
         builder
             .addCase(fetchProducts.pending, (state) => {
                 state.status = 'loading';
-                console.log('🔄 Loading products...');
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.items = action.payload;
-                console.log('✅ Products loaded:', action.payload);
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-                console.log('❌ Error:', action.error.message);
             })
     }
 });

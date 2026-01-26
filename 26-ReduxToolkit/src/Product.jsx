@@ -9,13 +9,17 @@ const Product = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('🚀 Dispatching fetchProducts...');
     dispatch(fetchProducts());
-  }, [dispatch]); 
+  }, [dispatch]);
 
   const productSelector = useSelector((state) => {
-    console.log("state", state);
+    // console.log("productSelector", state);
     return state.products.items;
+  });
+
+  const CartSelector = useSelector((state) => {
+    // console.log("Add to cart:", state.cart.items);
+    return state.cart.items;
   });
 
   return (
@@ -29,7 +33,18 @@ const Product = () => {
               <div className="brand">{product.brand}</div>
               <div className="price">${product.price}</div>
               <div className="rating">{product.rating}</div>
-              <button class="add-to-cart">Add To Cart</button>
+              {CartSelector.find((item) => item.id === product.id) ? (
+                <button onClick={() => dispatch(removeItem(product))} className="remove-from-cart">
+                  Remove from Cart
+                </button>
+              ) : (
+                <button
+                  onClick={() => dispatch(addItem(product))}
+                  className="add-to-cart"
+                >
+                  Add To Cart
+                </button>
+              )}
             </div>
           </div>
         ))}
