@@ -19,6 +19,7 @@ const addToCart = createSlice({
         },
         removeItem: (state, action) => {
             const index = state.items.findIndex((item) => item.id === action.payload.id);
+            console.log('action', action);
 
             if(index !== -1) {
                 state.items.splice(index, 1);
@@ -28,7 +29,7 @@ const addToCart = createSlice({
             }
         },
         clearAllItems: (state) => {
-            state.value = 0;
+            state.items = [];
         }
     }
 })
